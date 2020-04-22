@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/attendanceFragment">
+    <fragment
+        android:id="@+id/attendanceFragment"
+        android:name="com.example.attendance.attendance.AttendanceFragment"
+        android:label="AttendanceFragment"
+        tools:layout="@layout/fragment_attendance"/>
+    <fragment
+        android:id="@+id/addStudentFragment"
+        android:name="com.example.attendance.addstudent.AddStudentFragment"
+        android:label="AddStudentFragment"
+        tools:layout="@layout/fragment_add_student"/>
+    <fragment
+        android:id="@+id/oldRecordFragment"
+        android:name="com.example.attendance.attendance.OldRecordFragment"
+        android:label="OldRecordFragment"
+        tools:layout="@layout/fragment_old_record"/>
+
+</navigation>

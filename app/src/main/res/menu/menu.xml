@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/attendanceFragment"
+        android:title="Take Attendance" />
+    <item
+        android:id="@+id/addStudentFragment"
+        android:title="Add Students" />
+    <item
+        android:id="@+id/oldRecordFragment"
+        android:title="Old Records" />
+
+</menu>
