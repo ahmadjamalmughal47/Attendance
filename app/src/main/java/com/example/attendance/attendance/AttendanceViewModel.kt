@@ -30,32 +30,42 @@ class AttendanceViewModel(val dao: DAO) : ViewModel() {
             withContext(Dispatchers.IO) {
                 studentsList = dao.getStudents() as MutableList<Student>
                 if (studentsList.isNotEmpty()) currentStudent.postValue(studentsList[currentIndex])
-                Log.i("markPresent: ",
-                    dao.getAllRecords().toString())
+                Log.i(
+                    "markPresent: ",
+                    dao.getAllRecords().toString()
+                )
             }
         }
     }
 
     fun present() {
         markPresent()
-        goNext()
     }
 
     private fun markPresent() {
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 dao.markAttendance(
-                    AttendanceRecord(currentStudent.value!!.studentID,  java.sql.Date(System.currentTimeMillis()).toString(), true)
+                    AttendanceRecord(
+                        currentStudent.value!!.studentID,
+                        java.sql.Date(System.currentTimeMillis()).toString(),
+                        true
+                    )
                 )
-                Log.i("markPresent: ",
-                    dao.getAllRecords().toString())
+
+                Log.i(
+                    "markPresent: ",
+                    dao.getAllRecords().toString()
+                )
+
+                goNext()
+
             }
         }
     }
 
     fun absent() {
         markAbsent()
-        goNext()
     }
 
     fun back() {
@@ -70,11 +80,21 @@ class AttendanceViewModel(val dao: DAO) : ViewModel() {
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 dao.markAttendance(
-                    AttendanceRecord(currentStudent.value!!.studentID, java.sql.Date(System.currentTimeMillis()).toString(), false)
+                    AttendanceRecord(
+                        currentStudent.value!!.studentID,
+                        java.sql.Date(System.currentTimeMillis()).toString(),
+                        false
+                    )
                 )
-                Log.i("markAbsent: ",
-                    dao.getOldRecords( java.sql.Date(System.currentTimeMillis()).toString()).toString()
+
+                Log.i(
+                    "markAbsent: ",
+                    dao.getOldRecords(java.sql.Date(System.currentTimeMillis()).toString()).toString()
                 )
+
+                goNext()
+
+
             }
         }
     }
@@ -82,14 +102,15 @@ class AttendanceViewModel(val dao: DAO) : ViewModel() {
     private fun goBack() {
         if (currentIndex != 0) {
             currentIndex--
-            currentStudent.value = studentsList[currentIndex]
+            currentStudent.postValue(studentsList[currentIndex])
         }
     }
 
     private fun goNext() {
         if (currentIndex != (studentsList.size - 1)) {
             currentIndex++
-            currentStudent.value = studentsList[currentIndex]
+            currentStudent.postValue(studentsList[currentIndex])
         }
+
     }
 }
